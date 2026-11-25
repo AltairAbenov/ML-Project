@@ -1,5 +1,3 @@
-"""Step 1: train a simple classification model on the Iris dataset and save it."""
-
 import joblib
 from sklearn.datasets import load_iris
 from sklearn.ensemble import RandomForestClassifier
@@ -24,7 +22,6 @@ def main() -> None:
     print(f"Test accuracy: {accuracy_score(y_test, y_pred):.3f}")
     print(classification_report(y_test, y_pred, target_names=iris.target_names))
 
-    # Save the model together with metadata the API needs.
     artifact = {
         "model": model,
         "feature_names": list(iris.feature_names),
