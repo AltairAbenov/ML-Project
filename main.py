@@ -1,5 +1,3 @@
-"""Step 2: FastAPI application that serves predictions from model.joblib."""
-
 from pathlib import Path
 
 import joblib
@@ -14,7 +12,6 @@ app = FastAPI(
     version="1.0.0",
 )
 
-# Load the trained model once, when the app starts.
 if not MODEL_PATH.exists():
     raise RuntimeError(f"{MODEL_PATH} not found. Run `python train.py` first.")
 
@@ -52,7 +49,7 @@ def predict(features: IrisFeatures):
     try:
         pred = int(model.predict(x)[0])
         proba = model.predict_proba(x)[0]
-    except Exception as exc:  # pragma: no cover
+    except Exception as exc:
         raise HTTPException(status_code=500, detail=f"Prediction failed: {exc}")
 
     return PredictionResponse(
